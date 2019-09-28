@@ -1,0 +1,218 @@
+\pdfoutput=1
+\pdfcompresslevel=9
+\pdfinfo
+{
+  /Author ()
+  /Title ()
+  /Subject ()
+  /Keywords ()
+}
+\documentclass[a4paper,onecolumn,twoside,12pt]{mwrep}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\usepackage{enumitem}
+\usepackage{times}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{bbm}
+\usepackage{placeins}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[numbers]{natbib}
+\usepackage{lineno,hyperref}
+\usepackage{float}
+\usepackage{subfigure}
+\modulolinenumbers[5]
+\usepackage{amsfonts,amssymb,graphicx,color}
+\usepackage[]{algorithm2e}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+\usepackage{amsmath}
+\DeclareMathOperator{\sgn}{sgn}
+\hyphenpenalty=10000		% nie dziel wyrazów zbyt często
+\clubpenalty=10000			% kara za sierotki
+\widowpenalty=10000			% nie pozostawiaj wdów
+\brokenpenalty=10000		% nie dziel wyrazów między stronami
+\exhyphenpenalty=999999		% nie dziel słów z myślnikiem
+\righthyphenmin=3			% dziel minimum 3 litery
+\usepackage{amsthm}
+\tolerance=4500
+\pretolerance=250
+\hfuzz=1.5pt
+\hbadness=1450
+\sloppy						% umacnia pozycję prawego marginesu
+
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-5cm}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-5cm}
+\setlength{\oddsidemargin}{1cm}
+\setlength{\evensidemargin}{0cm}
+\topmargin -1.25cm
+\footskip 1.4cm
+
+\usepackage{geometry}
+\geometry{lmargin=3cm,rmargin=2cm}
+
+
+\linespread{1.3}
+
+\def\code#1{\texttt{#1}}
+\DeclareMathOperator*{\argmaxB}{argmax}
+\setcounter{secnumdepth}{3}
+\begin{document}
+
+\theoremstyle{plain}
+\newtheorem{defn}{Definition}[chapter]
+\newtheorem{prop}{Property}[chapter]
+\newtheorem{exmp}{Example}[section]
+
+\begin{titlepage}
+	\begin{center}
+	\fontsize{20pt}{34pt}\selectfont
+	Wrocław University of~Science and Technology \\
+	\vspace*{.6\baselineskip}
+	\fontsize{20pt}{18pt}\selectfont
+	Faculty of~Geoengineering, Mining and Geology
+
+	\vspace*{4\baselineskip}
+	
+	\fontsize{20pt}{15pt}\selectfont
+	mgr inż. Jacek Wodecki\\%
+	\vspace*{3.15\baselineskip}
+	\fontseries{b}\fontsize{20pt}{18pt}\selectfont
+	Methods of~multidimensional data processing \\for damage detection in~mining machines \\
+		\vspace*{1.15\baselineskip}
+	\fontseries{b}\fontsize{20pt}{18pt}\selectfont
+  Metody przetwarzania danych wielowymiarowych w~detekcji uszkodzeń maszyn górniczych \\
+	\vspace*{2.15\baselineskip}
+	\fontseries{m}\fontsize{20pt}{20pt}\selectfont
+	Doctoral Dissertation \\
+	
+	\end{center}
+	\vspace*{3.15\baselineskip}
+		\begin{flushright}
+	\fontseries{m}\fontsize{16pt}{16pt}\selectfont
+Thesis advisor\\
+	dr hab. inż. Radosław Zimroz, prof. uczelni\\
+	\end{flushright}
+		\vspace*{1\baselineskip}
+		\begin{center}
+	\fontseries{m}\fontsize{14pt}{1pt}\selectfont
+	Wrocław 2019
+  \end{center}
+  
+
+% \clearpage \newpage \mbox{~} \clearpage \newpage
+\cleardoublepage
+\thispagestyle{empty}
+\end{titlepage}
+% \vspace*{2\baselineskip}
+
+
+\begin{flushright}
+
+% \textit{"Problems worthy of~attack prove their worth by~fighting back."\\
+% - Piet Hein}
+
+\textit{"The Universe is~under no obligation to~make sense to~you."\\
+- dr Neil deGrasse Tyson}
+\end{flushright}
+
+\vspace*{21\baselineskip}
+
+\begin{center}
+	\textit{
+\textbf{Autor pracy pragnie podziękować}}
+\end{center}
+
+\begin{flushleft}
+% \textit{Autor pracy pragnie podziękować:} \\ 
+\vspace*{1\baselineskip}
+\textit{Żonie, za nieustanne wsparcie i motywację.} \\
+\vspace*{1\baselineskip}
+\textit{Promotorowi, za cenne uwagi i cierpliwość w trakcie trwania studiów doktoranckich.} \\
+\vspace*{1\baselineskip}
+\textit{Współpracownikom, za wszelką pomoc i wsparcie.} \\
+
+
+\end{flushleft}
+
+% \vspace*{12\baselineskip}
+
+
+% \clearpage \newpage \mbox{~} \clearpage \newpage
+\cleardoublepage
+\thispagestyle{empty}
+\newpage
+
+% streszczenie
+\begin{center}
+\textbf{Streszczenie}
+\end{center}
+
+W związku z~postępującą automatyzacją procesów we~wszyskich gałęziach gospodarki, współczesny przemysł wydobywczy wykazuje wysokie zapotrzebowanie na~zdalne wykrywanie uszkodzeń maszyn górniczych w sposób automatyczny. Ciągła poprawa wydajności i~dokładności algorytmów analitycznych pozwala na wykrywanie wczesnych form uszkodzeń celem zapobiegania awariom, oraz świadome planowanie inspekcji i~napraw. W~przypadku analizy sygnałów rzeczywistych zarejestrowanch w czasie pracy maszyn, konieczne jest uwzględnienie różnego rodzaju składowch (zarówno losowch jak i deterministycznych) obecnych w sygnałach diagnostycznych, których występowanie utrudnia dostęp do poszukiwanej informacji. Z~tego względu autor postanowił wykorzystać wielowymiarowe techniki przetwarzania danych, które umożliwiają dogłębną analizę, pozwalając w efekcie na dostęp do ukrytej informacyjności.
+
+W związku ze wspomnianymi trudnościami autor zaproponował dwa podejścia do analizy danych rzeczywistych: analiza danych wielokanałowych, oraz analiza wielowymiarowych reprezentacji danych. W~pierwszym przypadku metody ekstrakcji cech zostały użyte w~podejściu fuzji danych w~celu opisania anomalii występującej w~danych jako ich wewnętrzną deterministyczną cechę. W~drugim podejściu indywidualne sygnały zostały przedstawione w dziedzinach rozszerzonych, które były dalej analizowane technikami wielowymiarowymi w~celu opisania nieprawidłowości ze~statystycznego punktu widzenia.
+
+\vspace*{\baselineskip}
+
+\noindent\textbf{Słowa kluczowe:} \textit{Analiza wielowymiarowa, fuzja danych wielokanałowych, szeregi czasowe, przetwarzanie sygnałów, reprezentacja czasowo-częstotliwościowa, wykrywanie uszkodzeń, łożyska, przekładnie, maszyny górnicze.}
+
+% \vspace*{2\baselineskip}
+% \thispagestyle{empty}
+% \newpage
+% \clearpage \newpage \mbox{~} \clearpage \newpage
+\cleardoublepage
+\thispagestyle{empty}
+\newpage
+\begin{center}
+\textbf{Abstract}
+\end{center}
+
+Considering progressing automation of~industrial processes, automated damage detection in~mining machines is~of~increasing demand in~the~modern raw materials industry. Progressing efficiency and precision of~data processing algorithms allows for early damage detection, as~well as~more aware planning of~maintenance and inspection. In case of~real-life analysis signal registered during machine operation, it~is~necessary to~take into consideration the~presence of~various components (random as~well as~deterministic) that obstruct the~access to~the~desired information. Hence, the~author has moved towards exploitation of~multidimensional analytical techniques, that enable in-depth analysis, allowing to~unravel hidden information.
+
+The described problem has been approached from two different angles: the~analysis of~multichannel records, or using techniques based on~multidimensional data representations. In the~first case, feature extraction methods were used together with data fusion approach to~describe the~anomalous behavior as~one of~the~components present within a~signal from a~deterministic point of~view. On the~other hand, multidimensional data representations were applied to~individual signals to~be able to~describe them in~terms of~extended domains, and then use multidimensional analytical techniques to~process them and discover unexpected behaviors from a statistical point of~view.
+
+\vspace*{\baselineskip}
+
+\noindent\textbf{Keywords:} \textit{Multidimensional analysis, multichannel data fusion, time series, signal processing, time-frequency representation, fault detection, bearings, gearboxes, mining machines.}
+
+
+% \clearpage \newpage \mbox{~} \clearpage \newpage
+
+%  \newpage \pagebreak
+\cleardoublepage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\tableofcontents
+\cleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{introduction}
+\cleardoublepage
+\input{problem}
+\cleardoublepage
+\input{obiekty}
+\cleardoublepage
+\input{soa}
+\cleardoublepage
+\input{metodologia}
+\cleardoublepage
+\input{rzeczywiste}
+\cleardoublepage
+\input{konkluzje}
+\cleardoublepage
+\input{appendix}
+\cleardoublepage
+
+\bibliographystyle{apa}
+\bibliography{mybibfile}
+
+\listoffigures
+\listoftables
+\end{document}
+
+% ex: set tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab fileformat=unix filetype=tex spelllang=pl,en spell:
+
